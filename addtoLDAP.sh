@@ -1,3 +1,4 @@
+#!/bin/bash -xe
 
 #input the SCHEDULER_HOSTNAME which is also the LDAP server host name
 SCHEDULER_HOSTNAME=
@@ -123,6 +124,6 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 echo "UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config
 
-#sudo reboot
+sudo reboot
 
 
