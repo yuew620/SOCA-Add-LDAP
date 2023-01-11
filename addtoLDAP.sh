@@ -57,6 +57,7 @@ SSSD_PKGS=(
     sssd-proxy
 )
 
+
 # Disable SELINUX
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
@@ -66,6 +67,8 @@ SERVER_HOSTNAME=$(hostname)
 SERVER_HOSTNAME_ALT=$(echo $SERVER_HOSTNAME | cut -d. -f1)
 echo $SERVER_IP $SERVER_HOSTNAME $SERVER_HOSTNAME_ALT >> /etc/hosts
 
+yum install -y $(echo ${OPENLDAP_SERVER_PKGS[*]})
+yum install -y $(echo ${SSSD_PKGS[*]})
 
 # Configure Ldap
 echo "URI ldap://$SCHEDULER_HOSTNAME" >> /etc/openldap/ldap.conf
