@@ -113,6 +113,9 @@ echo | openssl s_client -connect $SCHEDULER_HOSTNAME:389 -starttls ldap > /root/
 mkdir /etc/openldap/cacerts/
 cat /root/open_ssl_ldap | openssl x509 > /etc/openldap/cacerts/openldap-server.pem
 
+#centOS6 openssl not work , so add a copy content
+#copy /etc/openldap/cacerts/  from other soca host to this host
+
 authconfig --disablesssd --disablesssdauth --disableldap --disableldapauth --disablekrb5 --disablekrb5kdcdns --disablekrb5realmdns --disablewinbind --disablewinbindauth --disableldaptls --disablerfc2307bis --updateall
 sss_cache -E
 authconfig --enablesssd --enablesssdauth --enableldap --enableldaptls --enableldapauth --ldapserver=ldap://$SCHEDULER_HOSTNAME --ldapbasedn=$LDAP_BASE --enablelocauthorize --enablemkhomedir --enablecachecreds --updateall
